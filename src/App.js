@@ -14,9 +14,9 @@ function App() {
       <div className={"App"}>
         <Nav />
         <Switch>
-          <Route path="/project/:id">
-            <h1>ducks are the best</h1>
-            {/* <ProjectPage /> */}
+          <Route path="/projects/:id/">
+            {/* <h1>ducks are the best</h1> */}
+            <ProjectPage />
           </Route>
           <Route path="/" exact>
             <HomePage />
