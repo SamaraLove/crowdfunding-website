@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProjectCard from "../components/ProjectCard/ProjectCard";
-import { allProjects } from "../data";
 
 function HomePage() {
-  //   return <h1>This is the home page.</h1>;
+  //variables
+  const [projectList, setProjectList] = useState([]);
+
+  //methods
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}projects/`)
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        setProjectList(data);
+      });
+  }, []);
+
+  //template
   return (
     <div id="project-list">
-      {allProjects.map((projectData, key) => {
+      {projectList.map((projectData, key) => {
         return <ProjectCard key={key} projectData={projectData} />;
         // <div key={key}>{projectData.title}</div>;
       })}

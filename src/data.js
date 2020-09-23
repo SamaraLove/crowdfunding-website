@@ -78,3 +78,17 @@ export const oneProject = {
     },
   ],
 };
+
+export const oneUser = {
+  username: "TESTYtest",
+  email: "test2@test.com",
+  password: "THisNewHALP12@#%!",
+  userprofile: {
+    rating: 5,
+    created: "2020-03-20T14:28:23.382748Z",
+    updated: "2020-09-02T12:57:28.105231Z",
+    profile_img: "https://via.placeholder.com/300.jpg",
+    bio: "this is me this is me this is me this is me",
+    location: "Perth",
+  },
+};

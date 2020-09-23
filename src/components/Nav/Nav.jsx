@@ -5,7 +5,11 @@ function Nav() {
   return (
     <nav>
       <Link to="/">Home</Link>
-      <Link to="/project">Project</Link>
+      <Link to="/about">About</Link>
+      <Link to="/profile">Profile</Link>
+      {/* <Link to="/createProject">CreateProject</Link> */}
+      {/* <Link to="/Login">Login</Link> */}
+      {/* <Link to="/CreateAccount">CreateAccount</Link> */}
     </nav>
   );
 }
