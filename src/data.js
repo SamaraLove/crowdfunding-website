@@ -80,6 +80,7 @@ export const oneProject = {
 };
 
 export const oneUser = {
+  id: 1,
   username: "TESTYtest",
   email: "test2@test.com",
   password: "THisNewHALP12@#%!",

@@ -14,8 +14,13 @@ function App() {
       <div className={"App"}>
         <Nav />
         <Switch>
+          <Route path="/about">
+            <AboutPage />
+          </Route>
+          <Route path="/users/:id/">
+            <ProfilePage />
+          </Route>
           <Route path="/projects/:id/">
-            {/* <h1>ducks are the best</h1> */}
             <ProjectPage />
           </Route>
           <Route path="/" exact>

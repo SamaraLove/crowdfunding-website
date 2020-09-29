@@ -8,7 +8,6 @@ function ProjectPage() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)
       .then((results) => {
-        console.log("woohoo");
         return results.json();
       })
       .then((data) => {
@@ -23,6 +22,7 @@ function ProjectPage() {
       <img src={projectData.image} />
       <h3>{`Status: ${projectData.is_open}`}</h3>
       <p>Description: {projectData.description}</p>
+      <p>Owner: {projectData.owner}</p>
       <p>Goal: {projectData.goal}</p>
       <p>Deadline: {projectData.deadline}</p>
       <p>Total Contributed: ${projectData.pledge_total}</p>
