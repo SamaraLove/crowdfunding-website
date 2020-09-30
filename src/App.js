@@ -6,6 +6,8 @@ import ProjectPage from "./pages/ProjectPage";
 import ProfilePage from "./pages/ProfilePage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/Login";
+import CreatePledgePage from "./pages/CreatePledgePage";
+import CreateProjectPage from "./pages/CreateProjectPage";
 
 import "./App.css";
 
@@ -17,6 +19,12 @@ function App() {
         <Switch>
           <Route path="/about">
             <AboutPage />
+          </Route>
+          <Route path="/createproject">
+            <CreateProjectPage />
+          </Route>
+          <Route path="/createpledge">
+            <CreatePledgePage />
           </Route>
           <Route path="/login">
             <LoginPage />
