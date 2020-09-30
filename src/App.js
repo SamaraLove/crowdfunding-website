@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
 import ProfilePage from "./pages/ProfilePage";
 import AboutPage from "./pages/AboutPage";
+import LoginPage from "./pages/Login";
 
 import "./App.css";
 
@@ -16,6 +17,9 @@ function App() {
         <Switch>
           <Route path="/about">
             <AboutPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
           </Route>
           <Route path="/users/:id/">
             <ProfilePage />
