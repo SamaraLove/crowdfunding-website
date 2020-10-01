@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function LoginForm() {
   const [credentials, setCredentials] = useState({
@@ -33,7 +33,7 @@ function LoginForm() {
     e.preventDefault();
     if (credentials.username && credentials.password) {
       postData().then((response) => {
-        console.log(response);
+        console.log("response:", response);
         window.localStorage.setItem("token", response.token);
         history.push("/");
       });
@@ -63,6 +63,8 @@ function LoginForm() {
       <button type="submit" onClick={handleSubmit}>
         Login
       </button>
+      <p>Don't have an account? Create one now!</p>
+      <Link to="/CreateAccount">Create Account</Link>
     </form>
   );
 }

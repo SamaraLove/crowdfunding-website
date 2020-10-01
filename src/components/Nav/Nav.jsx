@@ -13,14 +13,13 @@ function Nav() {
 
   const logout = () => {
     window.localStorage.clear();
-    history.push("/login");
+    history.push("/");
   };
 
   return (
     <div>
       <Link to="/">Home</Link>
       <Link to="/about">About</Link>
-      <Link to="/users">Profile</Link>
       {!LoggedIn ? (
         <>
           <Link to="/login">Login</Link>
@@ -29,6 +28,7 @@ function Nav() {
       ) : (
         <>
           <Link to="/createProject">CreateProject</Link>
+          <Link to="/profile">Profile</Link>
           <Link to="/" onClick={logout}>
             Logout
           </Link>

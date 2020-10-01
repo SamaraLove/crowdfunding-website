@@ -8,6 +8,8 @@ import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/Login";
 import CreatePledgePage from "./pages/CreatePledgePage";
 import CreateProjectPage from "./pages/CreateProjectPage";
+import CreateAccount from "./pages/CreateAccount";
+import AllUsers from "./pages/AllUsersPage";
 
 import "./App.css";
 
@@ -20,6 +22,12 @@ function App() {
           <Route path="/about">
             <AboutPage />
           </Route>
+          <Route path="/users">
+            <AllUsers />
+          </Route>
+          <Route path="/createaccount">
+            <CreateAccount />
+          </Route>
           <Route path="/createproject">
             <CreateProjectPage />
           </Route>
@@ -29,7 +37,7 @@ function App() {
           <Route path="/login">
             <LoginPage />
           </Route>
-          <Route path="/users/:id/">
+          <Route path="/profile/:id/">
             <ProfilePage />
           </Route>
           <Route path="/projects/:id/">

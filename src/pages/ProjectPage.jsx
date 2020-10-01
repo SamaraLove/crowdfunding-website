@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function ProjectPage() {
-  const [projectData, setProjectData] = useState({ pledges: [] });
+  //functions to get the userid url
+  //currently is project id..not userid
+  const [userData, setUserData] = useState({ userprofile: {} });
   const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}users/${id}/`)
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        setUserData(data);
+      });
+  }, []);
+
+  const [projectData, setProjectData] = useState({ pledges: [] });
+  // const { id } = useParams();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)
@@ -14,20 +29,23 @@ function ProjectPage() {
         setProjectData(data);
       });
   }, []);
-
   return (
     <div>
       <h2>{projectData.title}</h2>
       <h3>Created at: {projectData.date_created}</h3>
-      <img src={projectData.image} />
+      <img src={projectData.image} alt={projectData.title} />
       <h3>{`Status: ${projectData.is_open}`}</h3>
       <p>Description: {projectData.description}</p>
-      <p>Owner: {projectData.owner}</p>
-      <p>Goal: {projectData.goal}</p>
+      <Link to={`/profile/${userData.id}/`}>
+        <p>Owner: {projectData.owner}</p>
+      </Link>
+      <p>Goal: ${projectData.goal}</p>
       <p>Deadline: {projectData.deadline}</p>
       <p>Total Contributed: ${projectData.pledge_total}</p>
       <p>Company: {projectData.company}</p>
       <p>Category: {projectData.category}</p>
+      <Link to="/createPledge">CreatePledge</Link>
+      {/* If you're the project lead, see more stats below? */}
       {/* <p>biggest_contribution: {oneProject.biggest_contribution}</p>
       <p>no_of_pledges: {oneProject.no_of_pledges}</p>
       <p>last_update_at: {oneProject.last_update_at}</p> */}
@@ -36,7 +54,7 @@ function ProjectPage() {
       <ul>
         {projectData.pledges.map((pledgeData, key) => {
           return (
-            <li>
+            <li key={pledgeData.id}>
               ${pledgeData.amount} from {pledgeData.supporter} "
               {pledgeData.comment}"
             </li>

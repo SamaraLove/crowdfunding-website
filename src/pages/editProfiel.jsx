@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+// import { oneUser } from "../data";
 
 function ProfilePage() {
   const [userData, setUserData] = useState({ userprofile: {} });
@@ -14,8 +15,11 @@ function ProfilePage() {
         setUserData(data);
       });
   }, []);
+  console.log(userData.userprofile);
 
   function ProfileExist() {
+    console.log(userData.userprofile);
+
     if (userData.userprofile) {
       return (
         <div>
@@ -35,8 +39,6 @@ function ProfilePage() {
   return (
     <div>
       <h2>{userData.username}</h2>
-      <h2>ID: {userData.id}</h2>
-
       <h3>Email: {userData.email}</h3>
       {/* <p>password: {userData.password}</p> */}
       <ProfileExist />
