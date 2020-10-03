@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
 
 function CreatePledgePage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
+  const { id } = useParams();
+  console.log("pledgepage", id);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -21,9 +23,7 @@ function CreatePledgePage() {
           <Link to="/CreateAccount">CreateAccount</Link>
         </>
       ) : (
-        <>
-          <CreatePledgeForm />
-        </>
+        <>{/* <CreatePledgeForm id={id} /> */}</>
       )}
     </div>
   );

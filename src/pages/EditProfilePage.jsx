@@ -37,13 +37,21 @@ function ProfilePage() {
   }
 
   return (
+    //   <h1>This is the create project form.</h1>
     <div>
-      <h2>{userData.username}</h2>
-      <h3>Email: {userData.email}</h3>
-      {/* <p>password: {userData.password}</p> */}
-      <ProfileExist />
+      {!LoggedIn ? (
+        <>
+          <p>You not owner</p>
+        </>
+      ) : (
+        <>
+          <p>You owner</p>
+          <EditProfileForm userData={userData} />
+        </>
+      )}
     </div>
   );
+}
 }
 
 export default ProfilePage;

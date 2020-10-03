@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-function CreatePledgeForm(props) {
-  const { id } = props;
-
+function CreateProjectFrom(props) {
   const history = useHistory();
-  console.log(id);
+  const { pledgeData } = props;
+
   const [credentials, setCredentials] = useState({
     amount: "",
     comment: "",
     anonymous: false,
-    project_id: id,
+    // project_id: projectData.id,
     // supporter
   });
+
+  useEffect(() => {
+    setCredentials({
+      amount: projectData.amount,
+      comment: projectData.comment,
+      anonymous: projectData.anonymous,
+    });
+  }, [pledgeData]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -22,36 +29,30 @@ function CreatePledgeForm(props) {
     }));
   };
 
-  const postData = async () => {
+  const editData = async () => {
     let token = window.localStorage.getItem("token");
-    // credentials.project_id = projectData.id;
-    // debugger;
     const response = await fetch(`${process.env.REACT_APP_API_URL}pledges/`, {
-      method: "post",
+      method: "put",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
       },
       body: JSON.stringify(credentials),
-      //     body: JSON.stringify({
-      //       ...credentials,
-      //       project_id: {projectData.id}
-      //     }),
-      //   });
     });
     return response.json();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (credentials.amount) {
-      postData().then((response) => {
+    if (credentials.amount && credentials.project_id) {
+      editData().then((response) => {
         console.log(response);
-        // console.lo;
         window.localStorage.setItem("pledge", response);
-        history.push(`/projects/${id}`);
+        history.push("/");
       });
     }
   };
+
   return (
     //   <h1>This is the create pledge form.</h1>
     <form>
@@ -61,7 +62,7 @@ function CreatePledgeForm(props) {
           type="number"
           min="0"
           id="amount"
-          placeholder="Enter amount in $AUD"
+          value={credentials.amount}
           onChange={handleChange}
         />
       </div>
@@ -70,7 +71,7 @@ function CreatePledgeForm(props) {
         <input
           type="text"
           id="comment"
-          placeholder="Enter a comment"
+          value={credentials.comment}
           onChange={handleChange}
         />
       </div>
@@ -79,7 +80,7 @@ function CreatePledgeForm(props) {
         <input
           type="checkbox"
           id="anonymous"
-          placeholder="anonymous"
+          value={credentials.anonymous}
           onChange={handleChange}
         />
       </div>
@@ -89,15 +90,15 @@ function CreatePledgeForm(props) {
           type="number"
           min="1"
           id="project_id"
-          placeholder="project id"
+          value={credentials.Project_id}
           onChange={handleChange}
         />
       </div> */}
       <button type="submit" onClick={handleSubmit}>
-        Submit
+        Update
       </button>
     </form>
   );
 }
 
-export default CreatePledgeForm;
+export default CreateProjectFrom;

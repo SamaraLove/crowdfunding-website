@@ -1,17 +1,20 @@
 To do 
 Userprofile {} issues when creating account 
 If each item exists in userprofile, show it, otherwise hide it
-add Progress bar back in 
-pledges automatically relate to the project 
+not loading Progress bar 
 project owner links to user profile page (currently links to user profile of project id)
 
-Don't know who to donate to? See our reccommended proejcts below. 
 
 Decimal scale progress bar
 
-Fix PUT in herkou
+
+
 
 Done:
 Hide date created, ;last  update 
+pledges automatically relate to the project 
 
 change required for dates etc. in model?
+
+
+Don't know who to donate to? See our reccommended proejcts below. 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import ProgressBar from "../components/ProgressBar";
 import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
+// import CreatePledgeForm from "./CreatePledgePage";
 
 function ProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
@@ -72,8 +73,6 @@ function ProjectPage() {
         <p>Total Contributed: ${projectData.pledge_total}</p>
         <p>Company: {projectData.company}</p>
         <p>Category: {projectData.category}</p>
-        <Link to="/createPledge">CreatePledge</Link>
-        <CreatePledgeForm />
         {/* If you're the project lead, see more stats below? */}
         {/* <p>biggest_contribution: {oneProject.biggest_contribution}</p>
       <p>no_of_pledges: {oneProject.no_of_pledges}</p>
@@ -91,6 +90,8 @@ function ProjectPage() {
           })}
         </ul>
       </div>
+      <p>Gift a Pledge</p>
+      <CreatePledgeForm id={id} />
     </div>
   );
 }

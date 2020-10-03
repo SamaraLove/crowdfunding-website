@@ -35,9 +35,9 @@ function App() {
           <Route path="/createproject">
             <CreateProjectPage />
           </Route>
-          <Route path="/createpledge">
+          {/* <Route path="/projects/:id/">
             <CreatePledgePage />
-          </Route>
+          </Route> */}
           <Route path="/login">
             <LoginPage />
           </Route>

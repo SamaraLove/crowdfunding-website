@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-function CreateAccountPage() {
+function CreateProjectFrom(props) {
   const history = useHistory();
+  const { userData } = props;
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -19,6 +20,19 @@ function CreateAccountPage() {
     },
   });
 
+  useEffect(() => {
+    setCredentials({
+      username: userData.username,
+      email: userData.email,
+      rating: userData.rating,
+      created: userData.created,
+      updated: userData.updated,
+      profileImg: userData.profileImg,
+      bio: userData.bio,
+      location: userData.location,
+    });
+  }, [userData]);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setCredentials((prevCredentials) => ({
@@ -27,27 +41,25 @@ function CreateAccountPage() {
     }));
   };
 
-  const postData = async () => {
+  const editData = async () => {
+    let token = window.localStorage.getItem("token");
     const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
-      method: "post",
+      method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       },
-      body: JSON.stringify({
-        ...credentials,
-        created: new Date().toISOString(),
-        updated: new Date().toISOString(),
-      }),
+      body: JSON.stringify(credentials),
     });
     return response.json();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (credentials.username && credentials.password) {
-      postData().then((response) => {
+      editData().then((response) => {
         console.log(response);
         window.localStorage.setItem("user", credentials.username);
-
         history.push("/");
       });
     }
@@ -60,7 +72,7 @@ function CreateAccountPage() {
         <input
           type="text"
           id="username"
-          placeholder="Enter username"
+          value={credentials.username}
           onChange={handleChange}
         />
       </div>
@@ -69,7 +81,7 @@ function CreateAccountPage() {
         <input
           type="email"
           id="email"
-          placeholder="Enter email"
+          value={credentials.email}
           onChange={handleChange}
         />
       </div>
@@ -78,7 +90,7 @@ function CreateAccountPage() {
         <input
           type="password"
           id="password"
-          placeholder="Password"
+          value={credentials.password}
           onChange={handleChange}
         />
       </div>
@@ -99,7 +111,7 @@ function CreateAccountPage() {
             type="number"
             min="0"
             id="rating"
-            placeholder="rating"
+            value={credentials.rating}
             onChange={handleChange}
           />
         </div>
@@ -108,7 +120,7 @@ function CreateAccountPage() {
           <input
             type="url"
             id="profile_img"
-            placeholder="profile_img"
+            value={credentials.profile_img}
             onChange={handleChange}
           />
         </div>
@@ -117,7 +129,7 @@ function CreateAccountPage() {
           <input
             type="text"
             id="bio"
-            placeholder="bio"
+            value={credentials.bio}
             onChange={handleChange}
           />
         </div>
@@ -126,7 +138,7 @@ function CreateAccountPage() {
           <input
             type="text"
             id="location"
-            placeholder="location"
+            value={credentials.location}
             onChange={handleChange}
           />
         </div>
@@ -138,4 +150,5 @@ function CreateAccountPage() {
     </form>
   );
 }
-export default CreateAccountPage;
+
+export default CreateProjectFrom;
