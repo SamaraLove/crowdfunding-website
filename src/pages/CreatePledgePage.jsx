@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
 
 function CreatePledgePage() {
   const [LoggedIn, setLoggedIn] = useState(false);
-  const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {

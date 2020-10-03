@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ProjectCard.css";
+import ProgressBar from "../ProgressBar";
 
 function ProjectCard(props) {
   //variables
@@ -13,6 +14,7 @@ function ProjectCard(props) {
         <img src={projectData.image} alt={projectData.title} />
         <h3>{projectData.title}</h3>
       </Link>
+      <ProgressBar value={projectData.pledge_total} max={projectData.goal} />
       <p>{projectData.category}</p>
     </div>
   );

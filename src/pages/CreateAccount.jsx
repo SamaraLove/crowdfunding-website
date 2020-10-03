@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CreateAccountForm from "../components/LoginForm/CreateAccountForm";
 
 function CreateAccountPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
-  //   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {

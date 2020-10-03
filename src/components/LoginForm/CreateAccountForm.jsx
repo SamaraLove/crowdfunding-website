@@ -42,7 +42,7 @@ function CreateAccountPage() {
     if (credentials.username && credentials.password) {
       postData().then((response) => {
         console.log(response);
-        window.localStorage.setItem("user", response);
+        window.localStorage.setItem("user", credentials.username);
 
         history.push("/");
       });
@@ -88,55 +88,64 @@ function CreateAccountPage() {
             />
           </div> */}
       <div>
-        <label htmlFor="rating">Rating:</label>
-        <input
-          type="number"
-          min="0"
-          id="rating"
-          placeholder="rating"
-          onChange={handleChange}
-        />
+        <p>userprofile: </p> {}
+        <div>
+          <label htmlFor="rating">Rating:</label>
+          <input
+            type="number"
+            min="0"
+            id="rating"
+            placeholder="rating"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="created">Created:</label>
+          <input
+            type="datetime-local"
+            id="created"
+            placeholder="created"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="updated">Updated:</label>
+          <input
+            type="datetime-local"
+            id="updated"
+            placeholder="updated"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="profile_img">Avatar:</label>
+          <input
+            type="url"
+            id="profile_img"
+            placeholder="profile_img"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="bio">Bio:</label>
+          <input
+            type="text"
+            id="bio"
+            placeholder="bio"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="location">Location:</label>
+          <input
+            type="text"
+            id="location"
+            placeholder="location"
+            onChange={handleChange}
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="created">Created:</label>
-        <input
-          type="datetime-local"
-          id="created"
-          placeholder="created"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="updated">Updated:</label>
-        <input
-          type="datetime-local"
-          id="updated"
-          placeholder="updated"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="profile_img">Avatar:</label>
-        <input
-          type="url"
-          id="profile_img"
-          placeholder="profile_img"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="bio">Bio:</label>
-        <input type="text" id="bio" placeholder="bio" onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="location">Location:</label>
-        <input
-          type="text"
-          id="location"
-          placeholder="location"
-          onChange={handleChange}
-        />
-      </div>
+
       <button type="submit" onClick={handleSubmit}>
         Create Account
       </button>

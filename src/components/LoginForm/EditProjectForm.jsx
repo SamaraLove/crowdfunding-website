@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-function CreateProjectFrom() {
+function EditProjectFrom(props) {
   const [categoryData, setcategoryData] = useState([]);
   const history = useHistory();
+  const { projectData } = props;
 
+  //   console.log("Data:", projectData);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}categories/`)
       .then((results) => {
@@ -15,7 +17,6 @@ function CreateProjectFrom() {
         // console.log(data);
         // data.map((category) => console.log(category.category));
       });
-    // cleanup()
   }, []);
 
   const [credentials, setCredentials] = useState({
@@ -31,6 +32,21 @@ function CreateProjectFrom() {
     // owner: "maintest",
     // last_update_at: "2020-09-05T11:01:29.014077+08:00",
   });
+
+  useEffect(() => {
+    setCredentials({
+      title: projectData.title,
+      description: projectData.description,
+      goal: projectData.goal,
+      image: projectData.image,
+      company: projectData.company,
+      deadline: projectData.deadline,
+      category: projectData.category,
+      date_created: projectData.date_created,
+      last_update_at: projectData.last_update_at,
+    });
+  }, [projectData]);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setCredentials((prevCredentials) => ({
@@ -39,23 +55,18 @@ function CreateProjectFrom() {
     }));
   };
 
-  const postData = async () => {
+  const editData = async () => {
     let token = window.localStorage.getItem("token");
     const response = await fetch(`${process.env.REACT_APP_API_URL}projects/`, {
-      method: "post",
+      method: "put",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
       },
-      body: JSON.stringify({
-        ...credentials,
-        date_created: new Date().toISOString(),
-        last_update_at: new Date().toISOString(),
-      }),
+      body: JSON.stringify(credentials),
     });
     return response.json();
   };
-  //... creates a copy
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,7 +85,7 @@ function CreateProjectFrom() {
       //   credentials.category
     ) {
       //   console.log("All data is there");
-      postData().then((response) => {
+      editData().then((response) => {
         window.localStorage.setItem("title", credentials.title);
         // console.log("set local storage");
         history.push("/");
@@ -90,7 +101,7 @@ function CreateProjectFrom() {
         <input
           type="text"
           id="title"
-          placeholder="Enter title"
+          value={credentials.title}
           onChange={handleChange}
         />
         {/* {errors.title && errors.title.type === "required" && (
@@ -102,7 +113,7 @@ function CreateProjectFrom() {
         <input
           type="text"
           id="description"
-          placeholder="description"
+          value={credentials.description}
           onChange={handleChange}
         />
       </div>
@@ -112,7 +123,7 @@ function CreateProjectFrom() {
           type="number"
           min="0"
           id="goal"
-          placeholder="goal in $AUD"
+          value={credentials.goal}
           onChange={handleChange}
         />
       </div>
@@ -121,7 +132,7 @@ function CreateProjectFrom() {
         <input
           type="url"
           id="image"
-          placeholder="image url"
+          value={credentials.image}
           onChange={handleChange}
         />
       </div>
@@ -130,7 +141,7 @@ function CreateProjectFrom() {
         <input
           type="text"
           id="company"
-          placeholder="company name"
+          value={credentials.company}
           onChange={handleChange}
         />
       </div>
@@ -139,7 +150,7 @@ function CreateProjectFrom() {
         <input
           type="date"
           id="deadline"
-          placeholder="deadline"
+          value={credentials.deadline}
           onChange={handleChange}
         />
       </div>
@@ -148,25 +159,16 @@ function CreateProjectFrom() {
         <input
           type="checkbox"
           id="is_open"
-          placeholder="is_open"
+          value={credentials.is_open}
           onChange={handleChange}
         />
       </div>
-      {/* this doesn't set it as a boolean for true and false  */}
-      {/* <div>
-      <label htmlFor="is_open">Open:</label>
-      <select type="select" id="is_open" onChange={handleChange}>
-        <option value="true">Yes</option>
-        <option value="alse">No</option>
-      </select>
-    </div> */}
-
       {/* <div>
         <label htmlFor="date_created">Date created:</label>
         <input
           type="datetime-local"
           id="date_created"
-          placeholder="date created"
+          value={credentials.date_created}
           onChange={handleChange}
         />
       </div>
@@ -175,7 +177,7 @@ function CreateProjectFrom() {
         <input
           type="datetime-local"
           id="last_update_at"
-          placeholder="last update at"
+          value={credentials.last_update_at}
           onChange={handleChange}
         />
       </div> */}
@@ -185,7 +187,7 @@ function CreateProjectFrom() {
         <select
           type="select"
           id="category"
-          placeholder="category"
+          value={credentials.category}
           onChange={handleChange}
         >
           {categoryData.map((cat) => (
@@ -197,10 +199,10 @@ function CreateProjectFrom() {
       </div>
 
       <button type="submit" onClick={handleSubmit}>
-        Create Project
+        Update Project
       </button>
     </form>
   );
 }
 
-export default CreateProjectFrom;
+export default EditProjectFrom;

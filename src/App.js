@@ -10,6 +10,7 @@ import CreatePledgePage from "./pages/CreatePledgePage";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import CreateAccount from "./pages/CreateAccount";
 import AllUsers from "./pages/AllUsersPage";
+import EditProjectPage from "./pages/EditProjectPage";
 
 import "./App.css";
 
@@ -19,6 +20,9 @@ function App() {
       <div className={"App"}>
         <Nav />
         <Switch>
+          <Route path="/projects/:id/edit">
+            <EditProjectPage />
+          </Route>
           <Route path="/about">
             <AboutPage />
           </Route>
@@ -43,6 +47,7 @@ function App() {
           <Route path="/projects/:id/">
             <ProjectPage />
           </Route>
+
           <Route path="/" exact>
             <HomePage />
           </Route>
