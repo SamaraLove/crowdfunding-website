@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import EditProjectForm from "../components/LoginForm/EditProjectForm";
 
-function CreateProjectPage() {
+function EditProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
 
@@ -23,6 +23,7 @@ function CreateProjectPage() {
         setProjectData(data);
       });
   }, []);
+
   return (
     //   <h1>This is the create project form.</h1>
     <div>
@@ -40,4 +41,4 @@ function CreateProjectPage() {
   );
 }
 
-export default CreateProjectPage;
+export default EditProjectPage;

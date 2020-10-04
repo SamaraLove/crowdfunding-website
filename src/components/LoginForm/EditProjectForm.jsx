@@ -5,8 +5,8 @@ function EditProjectFrom(props) {
   const [categoryData, setcategoryData] = useState([]);
   const history = useHistory();
   const { projectData } = props;
+  //   const { id } = props;
 
-  //   console.log("Data:", projectData);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}categories/`)
       .then((results) => {
@@ -55,16 +55,21 @@ function EditProjectFrom(props) {
     }));
   };
 
+  console.log("Data:", projectData.id);
+
   const editData = async () => {
     let token = window.localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_API_URL}projects/`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-      body: JSON.stringify(credentials),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}projects/${projectData.id}/`,
+      {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify(credentials),
+      }
+    );
     return response.json();
   };
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+// import { isAuthenticated } from "../helpers/localStorage";
 
 function ProfilePage() {
   const [userData, setUserData] = useState({ userprofile: {} });
-  const { id } = useParams();
+  const { username } = useParams();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}users/${id}/`)
+    fetch(`${process.env.REACT_APP_API_URL}users/${username}/`)
       .then((results) => {
         return results.json();
       })
@@ -32,14 +33,27 @@ function ProfilePage() {
     }
   }
 
+  // if (isAuthenticated()) {
+  //   return (
+  //     <Link to={`/profile/${username}/edit`}>
+  //       <p>Edit</p>
+  //     </Link>
+  //   );
+  // }
   return (
     <div>
-      <h2>{userData.username}</h2>
-      <h2>ID: {userData.id}</h2>
+      <div>
+        <Link to={`/profile/${username}/edit`}>
+          <p>Edit</p>
+        </Link>
+        <h2>{userData.username}</h2>
+        <h2>ID: {userData.id}</h2>
 
-      <h3>Email: {userData.email}</h3>
-      {/* <p>password: {userData.password}</p> */}
-      <ProfileExist />
+        <h3>Email: {userData.email}</h3>
+        {/* <p>password: {userData.password}</p> */}
+        <ProfileExist />
+      </div>
+      <p> Projects {userData.username} has created </p>
     </div>
   );
 }

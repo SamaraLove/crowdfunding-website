@@ -2,19 +2,19 @@ To do
 Userprofile {} issues when creating account 
 If each item exists in userprofile, show it, otherwise hide it
 not loading Progress bar 
-project owner links to user profile page (currently links to user profile of project id)
 
 
-Decimal scale progress bar
-
+pledge total not brought across>?
+automatically refresh after submit 
 
 
 
 Done:
 Hide date created, ;last  update 
 pledges automatically relate to the project 
+project owner links to user profile page (currently links to user profile of project id)
 
 change required for dates etc. in model?
 
 
-Don't know who to donate to? See our reccommended proejcts below. 
+Projects titles and deadlines are only editable if the deadline has not passed 

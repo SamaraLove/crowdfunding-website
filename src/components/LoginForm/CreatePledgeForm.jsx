@@ -5,7 +5,6 @@ function CreatePledgeForm(props) {
   const { id } = props;
 
   const history = useHistory();
-  console.log(id);
   const [credentials, setCredentials] = useState({
     amount: "",
     comment: "",

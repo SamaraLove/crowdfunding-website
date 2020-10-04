@@ -16,18 +16,19 @@ function ProjectPage() {
   //functions to get the userid url
   //currently is project id..not userid
 
-  const [userData, setUserData] = useState({ userprofile: {} });
+  // const [userData, setUserData] = useState({ userprofile: {} });
   const { id } = useParams();
+  // const { username } = useParams();
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}users/${id}/`)
-      .then((results) => {
-        return results.json();
-      })
-      .then((data) => {
-        setUserData(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}users/${username}/`)
+  //     .then((results) => {
+  //       return results.json();
+  //     })
+  //     .then((data) => {
+  //       setUserData(data);
+  //     });
+  // }, []);
 
   const [projectData, setProjectData] = useState({ pledges: [] });
   // const { id } = useParams();
@@ -65,7 +66,7 @@ function ProjectPage() {
         <img src={projectData.image} alt={projectData.title} />
         <h3>{`Status: ${projectData.is_open}`}</h3>
         <p>Description: {projectData.description}</p>
-        <Link to={`/profile/${userData.id}/`}>
+        <Link to={`/profile/${projectData.owner}/`}>
           <p>Owner: {projectData.owner}</p>
         </Link>
         <p>Goal: ${projectData.goal}</p>

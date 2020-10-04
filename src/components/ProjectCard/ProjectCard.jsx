@@ -8,6 +8,9 @@ function ProjectCard(props) {
   const { projectData } = props;
 
   //template
+  // console.log(projectData.pledge_total);
+  // console.log(projectData.goal);
+
   return (
     <div className="project-card">
       <Link to={`/projects/${projectData.id}/`}>

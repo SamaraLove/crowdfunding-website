@@ -6,11 +6,12 @@ import ProjectPage from "./pages/ProjectPage";
 import ProfilePage from "./pages/ProfilePage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/Login";
-import CreatePledgePage from "./pages/CreatePledgePage";
+// import CreatePledgePage from "./pages/CreatePledgePage";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import CreateAccount from "./pages/CreateAccount";
 import AllUsers from "./pages/AllUsersPage";
 import EditProjectPage from "./pages/EditProjectPage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 import "./App.css";
 
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route path="/projects/:id/edit">
             <EditProjectPage />
+          </Route>
+          <Route path="/profile/:username/edit">
+            <EditProfilePage />
           </Route>
           <Route path="/about">
             <AboutPage />
@@ -41,13 +45,12 @@ function App() {
           <Route path="/login">
             <LoginPage />
           </Route>
-          <Route path="/profile/:id/">
+          <Route path="/profile/:username/">
             <ProfilePage />
           </Route>
           <Route path="/projects/:id/">
             <ProjectPage />
           </Route>
-
           <Route path="/" exact>
             <HomePage />
           </Route>

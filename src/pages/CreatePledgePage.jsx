@@ -6,7 +6,7 @@ function CreatePledgePage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
   const { id } = useParams();
-  console.log("pledgepage", id);
+  // console.log("pledgepage", id);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
