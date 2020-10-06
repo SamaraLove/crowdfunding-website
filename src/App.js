@@ -12,6 +12,11 @@ import CreateAccount from "./pages/CreateAccount";
 import AllUsers from "./pages/AllUsersPage";
 import EditProjectPage from "./pages/EditProjectPage";
 import EditProfilePage from "./pages/EditProfilePage";
+import DeleteProjectPage from "./pages/DeleteProjectPage";
+import DeleteProfilePage from "./pages/DeleteProfilePage";
+import AllPledgesPage from "./pages/AllPledgesPage";
+import DELETE from "./pages/DELETE";
+import DELETEUSER from "./pages/DELETEUSER";
 
 import "./App.css";
 
@@ -21,12 +26,22 @@ function App() {
       <div className={"App"}>
         <Nav />
         <Switch>
+          <Route path="/profile/:username/delete">
+            <DELETEUSER />
+          </Route>
+          <Route path="/projects/:id/delete1">
+            <DeleteProjectPage />
+          </Route>
+          <Route path="/pledges">
+            <AllPledgesPage />
+          </Route>
+          {/* <Route path="/pledges/:id/">
+            <PledgePage />
+          </Route> */}
           <Route path="/projects/:id/edit">
             <EditProjectPage />
           </Route>
-          <Route path="/profile/:username/edit">
-            <EditProfilePage />
-          </Route>
+
           <Route path="/about">
             <AboutPage />
           </Route>
@@ -45,9 +60,14 @@ function App() {
           <Route path="/login">
             <LoginPage />
           </Route>
+          <Route path="/profile/:username/edit">
+            <EditProfilePage />
+          </Route>
+
           <Route path="/profile/:username/">
             <ProfilePage />
           </Route>
+
           <Route path="/projects/:id/">
             <ProjectPage />
           </Route>

@@ -31,14 +31,17 @@ function CreateProjectFrom(props) {
 
   const editData = async () => {
     let token = window.localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_API_URL}pledges/`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-      body: JSON.stringify(credentials),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}pledges/${pledgeData.id}`,
+      {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify(credentials),
+      }
+    );
     return response.json();
   };
 

@@ -9,15 +9,14 @@ function CreateAccountPage() {
     email: "",
     password: "",
     // password: "",
-    userprofile: {
-      rating: "",
-      created: "",
-      updated: "",
-      profileImg: "",
-      bio: "",
-      location: "",
-    },
+    userprofile: {},
   });
+  //   rating: "",
+  //   created: "",
+  //   updated: "",
+  //   profileImg: "",
+  //   bio: "",
+  //   location: "",
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -33,22 +32,23 @@ function CreateAccountPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...credentials,
-        created: new Date().toISOString(),
-        updated: new Date().toISOString(),
-      }),
+      body: JSON.stringify(credentials),
+      //   body: JSON.stringify({
+      //     ...credentials.userprofile,
+      //     created: new Date().toISOString(),
+      //     updated: new Date().toISOString(),
+      //   }),
     });
     return response.json();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (credentials.username && credentials.password) {
       postData().then((response) => {
         console.log(response);
         window.localStorage.setItem("user", credentials.username);
-
-        history.push("/");
+        history.push("/login");
       });
     }
   };
@@ -91,7 +91,7 @@ function CreateAccountPage() {
               onChange={handleChange}
             />
           </div> */}
-      <div>
+      {/* <div>
         <p>userprofile: </p>
         <div>
           <label htmlFor="rating">Rating:</label>
@@ -130,7 +130,7 @@ function CreateAccountPage() {
             onChange={handleChange}
           />
         </div>
-      </div>
+      </div> */}
 
       <button type="submit" onClick={handleSubmit}>
         Create Account

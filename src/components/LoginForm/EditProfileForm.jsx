@@ -11,10 +11,10 @@ function CreateProjectFrom(props) {
     password: "",
     // password: "",
     userprofile: {
-      rating: "",
-      created: "",
-      updated: "",
-      profileImg: "",
+      //   rating: "",
+      //   created: "",
+      //   updated: "",
+      profile_img: "",
       bio: "",
       location: "",
     },
@@ -24,12 +24,13 @@ function CreateProjectFrom(props) {
     setCredentials({
       username: userData.username,
       email: userData.email,
-      rating: userData.rating,
-      created: userData.created,
-      updated: userData.updated,
-      profileImg: userData.profileImg,
-      bio: userData.bio,
-      location: userData.location,
+      userprofile: {
+        //   created: userData.created,
+        //   updated: userData.updated,
+        profile_img: userData.userprofile.profile_img,
+        bio: userData.userprofile.bio,
+        location: userData.userprofile.location,
+      },
     });
   }, [userData]);
 
@@ -37,30 +38,38 @@ function CreateProjectFrom(props) {
     const { id, value } = e.target;
     setCredentials((prevCredentials) => ({
       ...prevCredentials,
-      [id]: value,
+      userprofile: { ...prevCredentials.userprofile, [id]: value },
+      //   [id]: value,
     }));
   };
+  console.log(credentials.userprofile.bio);
 
   const editData = async () => {
     let token = window.localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-      body: JSON.stringify(credentials),
-    });
+    let username = localStorage.username;
+    console.log(username);
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}users/${userData.username}`,
+      {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify(credentials),
+      }
+    );
     return response.json();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (credentials.username && credentials.password) {
+    console.log("Submit pressed");
+    if (credentials.username) {
       editData().then((response) => {
         console.log(response);
-        window.localStorage.setItem("user", credentials.username);
-        history.push("/");
+        window.localStorage.setItem("username", credentials.username);
+        history.push(`/profile/${userData.username}`);
       });
     }
   };
@@ -94,58 +103,39 @@ function CreateProjectFrom(props) {
           onChange={handleChange}
         />
       </div>
-      {/* <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              onChange={handleChange}
-            />
-          </div> */}
+      <p>User Profile: </p>
+
       <div>
-        <p>userprofile: </p>
-        <div>
-          <label htmlFor="rating">Rating:</label>
-          <input
-            type="number"
-            min="0"
-            id="rating"
-            value={credentials.rating}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="profile_img">Avatar:</label>
-          <input
-            type="url"
-            id="profile_img"
-            value={credentials.profile_img}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="bio">Bio:</label>
-          <input
-            type="text"
-            id="bio"
-            value={credentials.bio}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="location">Location:</label>
-          <input
-            type="text"
-            id="location"
-            value={credentials.location}
-            onChange={handleChange}
-          />
-        </div>
+        <label htmlFor="profile_img">Avatar:</label>
+        <input
+          type="url"
+          id="profile_img"
+          value={credentials.userprofile.profile_img}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="bio">Bio:</label>
+        <input
+          type="text"
+          id="bio"
+          value={credentials.userprofile.bio}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="location">Location:</label>
+        <input
+          type="text"
+          id="location"
+          //   placeholder="enter location"
+          value={credentials.userprofile.location}
+          onChange={handleChange}
+        />
       </div>
 
       <button type="submit" onClick={handleSubmit}>
-        Create Account
+        Update Account
       </button>
     </form>
   );

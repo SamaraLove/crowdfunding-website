@@ -27,7 +27,7 @@ function EditProjectFrom(props) {
     company: "",
     deadline: "",
     category: "",
-    // is_open: "",
+    is_open: "",
     // date_created: "2020-09-05T11:01:29.014038+08:00",
     // owner: "maintest",
     // last_update_at: "2020-09-05T11:01:29.014077+08:00",
@@ -44,8 +44,12 @@ function EditProjectFrom(props) {
       category: projectData.category,
       date_created: projectData.date_created,
       last_update_at: projectData.last_update_at,
+      is_open: projectData.is_open,
     });
   }, [projectData]);
+
+  console.log("proejctdata", projectData.is_open);
+  //   console.log("proejctdata", projectData.pledge_total);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -54,8 +58,6 @@ function EditProjectFrom(props) {
       [id]: value,
     }));
   };
-
-  console.log("Data:", projectData.id);
 
   const editData = async () => {
     let token = window.localStorage.getItem("token");

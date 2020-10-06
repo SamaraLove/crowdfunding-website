@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import ProgressBar from "../components/ProgressBar";
-import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
-// import CreatePledgeForm from "./CreatePledgePage";
 
-function ProjectPage() {
+function PledgePage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
 
@@ -15,60 +12,18 @@ function ProjectPage() {
 
   const { id } = useParams();
 
-  const today = new Date();
-  // const yesterday = new Date(today);
-  // yesterday.setDate(yesterday.getDate() - 1);
-
-  const [projectData, setProjectData] = useState({ pledges: [] });
+  const [pledgeData, setPledgeData] = useState();
+  // const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)
+    fetch(`${process.env.REACT_APP_API_URL}pledges/${id}/`)
       .then((results) => {
         return results.json();
       })
       .then((data) => {
-        setProjectData(data);
+        setPledgeData(data);
       });
   }, []);
-
-  const newdeadline = new Date(projectData.deadline);
-  const firstDateIsPastDayComparedToSecond = (firstDate, secondDate) => {
-    if (firstDate - secondDate >= 0) {
-      //first date is in future, or it is today
-      // return false;
-      return (projectData.is_open = true);
-    }
-    // return true;
-    return (projectData.is_open = false);
-  };
-
-  // console.log(firstDateIsPastDayComparedToSecond(yesterday, today));
-  //true
-  // console.log("today", firstDateIsPastDayComparedToSecond(today, yesterday));
-  //false
-  // console.log(
-  //   "deadline",
-  //   firstDateIsPastDayComparedToSecond(projectData.deadline, today)
-  // );
-  // console.log(
-  //   "deadline",
-  //   firstDateIsPastDayComparedToSecond(newdeadline, today)
-  // );
-  // console.log("today", today);
-  // console.log("Deadline", projectData.deadline);
-  // console.log("new", newdeadline);
-
-  function Status2() {
-    // <Status />;
-    if (projectData.is_open) {
-      return <p>Open</p>;
-    } else {
-      return <p>Closed</p>;
-    }
-    // elif {
-    //   console.error("No is_open defined");
-    // }
-  }
 
   return (
     <div>
@@ -83,24 +38,18 @@ function ProjectPage() {
             <Link to={`/projects/${id}/edit`}>
               <p>Edit</p>
             </Link>
-            <Link to={`/projects/${id}/delete1`}>
+            <Link to={`/projects/${id}/delete`}>
               <p>Delete</p>
             </Link>
           </>
         )}
       </div>
-
       <div>
         <h2>{projectData.title}</h2>
         <ProgressBar value={projectData.pledge_total} max={projectData.goal} />
         <h3>Created at: {projectData.date_created}</h3>
         <img src={projectData.image} alt={projectData.title} />
-        {/* <h3>{`Status: ${projectData.is_open}`}</h3> */}
-        <h3>
-          Status:
-          {firstDateIsPastDayComparedToSecond(newdeadline, today)}
-          <Status2 />
-        </h3>
+        <h3>{`Status: ${projectData.is_open}`}</h3>
         <p>Description: {projectData.description}</p>
         <Link to={`/profile/${projectData.owner}/`}>
           <p>Owner: {projectData.owner}</p>
@@ -114,6 +63,7 @@ function ProjectPage() {
         {/* <p>biggest_contribution: {oneProject.biggest_contribution}</p>
       <p>no_of_pledges: {oneProject.no_of_pledges}</p>
       <p>last_update_at: {oneProject.last_update_at}</p> */}
+
         <h3>Recent Pledges: </h3>
         <ul>
           {projectData.pledges.map((pledgeData, key) => {
@@ -132,4 +82,4 @@ function ProjectPage() {
   );
 }
 
-export default ProjectPage;
+export default PledgePage;

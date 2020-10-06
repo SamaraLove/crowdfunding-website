@@ -26,7 +26,7 @@ function CreateProjectFrom() {
     company: "",
     deadline: "",
     category: "",
-    // is_open: "",
+    // is_open: true,
     // date_created: "2020-09-05T11:01:29.014038+08:00",
     // owner: "maintest",
     // last_update_at: "2020-09-05T11:01:29.014077+08:00",
@@ -51,6 +51,7 @@ function CreateProjectFrom() {
         ...credentials,
         date_created: new Date().toISOString(),
         last_update_at: new Date().toISOString(),
+        // is_open:
       }),
     });
     return response.json();
@@ -143,7 +144,7 @@ function CreateProjectFrom() {
           onChange={handleChange}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="is_open">Open:</label>
         <input
           type="checkbox"
@@ -151,7 +152,7 @@ function CreateProjectFrom() {
           placeholder="is_open"
           onChange={handleChange}
         />
-      </div>
+      </div> */}
       {/* this doesn't set it as a boolean for true and false  */}
       {/* <div>
       <label htmlFor="is_open">Open:</label>

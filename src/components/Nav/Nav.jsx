@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 
 function Nav() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
   const location = useLocation();
+  const { username } = useParams();
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -28,7 +29,7 @@ function Nav() {
       ) : (
         <>
           <Link to="/createProject">CreateProject</Link>
-          <Link to="/profile">Profile</Link>
+          <Link to={`/profile/${username}`}>Profile</Link>
           <Link to="/" onClick={logout}>
             Logout
           </Link>

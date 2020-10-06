@@ -6,15 +6,9 @@ not loading Progress bar
 
 pledge total not brought across>?
 automatically refresh after submit 
+Delete issues
 
+How to clsoe prjects
 
-
-Done:
-Hide date created, ;last  update 
-pledges automatically relate to the project 
-project owner links to user profile page (currently links to user profile of project id)
-
-change required for dates etc. in model?
-
-
-Projects titles and deadlines are only editable if the deadline has not passed 
+Set Nav profile to logged in userprofile
+user isauthenticated
