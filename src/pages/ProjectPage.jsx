@@ -3,13 +3,13 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import ProgressBar from "../components/ProgressBar";
 import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
 // import CreatePledgeForm from "./CreatePledgePage";
-import DELETE from "./DELETE";
 
 function ProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
   let username = localStorage.username;
   // let token = localStorage.token;
+  const [IsSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -27,15 +27,21 @@ function ProjectPage() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)
       .then((results) => {
-        return results.json();
+        console.log(results);
+        if (results.ok) {
+          setIsSuccess(true);
+          return results.json();
+        }
       })
       .then((data) => {
         setProjectData(data);
+        console.log(data);
       });
   }, []);
 
-  const newdeadline = new Date(projectData.deadline);
-  const firstDateIsPastDayComparedToSecond = (firstDate, secondDate) => {
+  const firstDateIsPastDayComparedToSecond = (secondDate) => {
+    const firstDate = new Date(projectData.deadline);
+
     if (firstDate - secondDate >= 0) {
       //first date is in future, or it is today
       // return false;
@@ -44,22 +50,6 @@ function ProjectPage() {
     // return true;
     return (projectData.is_open = false);
   };
-
-  // console.log(firstDateIsPastDayComparedToSecond(yesterday, today));
-  //true
-  // console.log("today", firstDateIsPastDayComparedToSecond(today, yesterday));
-  //false
-  // console.log(
-  //   "deadline",
-  //   firstDateIsPastDayComparedToSecond(projectData.deadline, today)
-  // );
-  // console.log(
-  //   "deadline",
-  //   firstDateIsPastDayComparedToSecond(newdeadline, today)
-  // );
-  // console.log("today", today);
-  // console.log("Deadline", projectData.deadline);
-  // console.log("new", newdeadline);
 
   function Status2() {
     // <Status />;
@@ -132,72 +122,90 @@ function ProjectPage() {
 
   // console.log(formatDate(Date(projectData.date_created)));
 
+  // function IsSuccess() {}
+
   return (
     <div>
-      <div>
-        {!LoggedIn ? (
-          <>
-            <p>Not logged in</p>
-          </>
-        ) : (
-          <>
-            <p>logged in</p>
-            <IsOwnerCanEdit />
-          </>
-        )}
-      </div>
+      {!IsSuccess ? (
+        <>
+          <p>Not here</p>
+        </>
+      ) : (
+        <>
+          <div>
+            <div>
+              {!LoggedIn ? (
+                <>
+                  <p>Not logged in</p>
+                </>
+              ) : (
+                <>
+                  <p>logged in</p>
+                  <IsOwnerCanEdit />
+                </>
+              )}
+            </div>
 
-      <div>
-        <h2>{projectData.title}</h2>
-        <ProgressBar value={projectData.pledge_total} max={projectData.goal} />
-        {/* <h3>Created at: {projectData.date_created}</h3> */}
-        <h3>Created at: {Date(projectData.date_created)}</h3>
-        <img src={projectData.image} alt={projectData.title} />
-        {/* <h3>{`Status: ${projectData.is_open}`}</h3> */}
-        <h3>
-          Status:
-          {firstDateIsPastDayComparedToSecond(newdeadline, today)}
-          <Status2 />
-        </h3>
-        <p>Description: {projectData.description}</p>
-        <Link to={`/profile/${projectData.owner}/`}>
-          <p>Owner: {projectData.owner}</p>
-        </Link>
-        <p>Goal: ${projectData.goal}</p>
-        <p>Deadline: {projectData.deadline}</p>
-        <p>Total Contributed: ${projectData.pledge_total}</p>
-        <p>Company: {projectData.company}</p>
-        <p>Category: {projectData.category}</p>
-        {/* If you're the project lead, see more stats below? */}
-        {/* <p>biggest_contribution: {oneProject.biggest_contribution}</p>
+            <div>
+              <h2>{projectData.title}</h2>
+              <ProgressBar
+                value={projectData.pledge_total}
+                max={projectData.goal}
+              />
+              {/* <h3>Created at: {projectData.date_created}</h3> */}
+              <h3>Created at: {Date(projectData.date_created)}</h3>
+              <img src={projectData.image} alt={projectData.title} />
+              {/* <h3>{`Status: ${projectData.is_open}`}</h3> */}
+              <h3>
+                Status:
+                {firstDateIsPastDayComparedToSecond(today)}
+                <Status2 />
+              </h3>
+              <p>Description: {projectData.description}</p>
+              <Link to={`/profile/${projectData.owner}/`}>
+                <p>Owner: {projectData.owner}</p>
+              </Link>
+              <p>Goal: ${projectData.goal}</p>
+              <p>Deadline: {projectData.deadline}</p>
+              <p>Total Contributed: ${projectData.pledge_total}</p>
+              <p>Company: {projectData.company}</p>
+              <p>Category: {projectData.category}</p>
+              {/* If you're the project lead, see more stats below? */}
+              {/* <p>biggest_contribution: {oneProject.biggest_contribution}</p>
   <p>no_of_pledges: {oneProject.no_of_pledges}</p>
   <p>last_update_at: {oneProject.last_update_at}</p> */}
-        <h3>Recent Pledges: </h3>
-        <ul>
-          {projectData.pledges.map((pledgeData, key) => {
-            // if (pledgeData.id !== null) {
-            return (
-              <li key={pledgeData.id}>
-                ${pledgeData.amount} from {pledgeData.supporter} "
-                {pledgeData.comment}"
-              </li>
-            );
-            // }
-          })}
-        </ul>
-      </div>
-      <p>Gift a Pledge</p>
-      <div>
-        {!LoggedIn ? (
-          <>
-            <p>You have to be logged in to gift a pledge</p>
-          </>
-        ) : (
-          <>
-            <CreatePledgeForm id={id} />
-          </>
-        )}
-      </div>
+              {projectData.pledges && (
+                <div>
+                  <h3>Recent Pledges: </h3>
+                  <ul>
+                    {projectData.pledges.map((pledgeData, key) => {
+                      return (
+                        <li key={pledgeData.id}>
+                          ${pledgeData.amount} from {pledgeData.supporter} "
+                          {pledgeData.comment}"
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <p>Gift a Pledge</p>
+            <div>
+              {!LoggedIn ? (
+                <>
+                  <p>You have to be logged in to gift a pledge</p>
+                </>
+              ) : (
+                <>
+                  <CreatePledgeForm id={id} />
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
