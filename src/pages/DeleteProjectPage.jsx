@@ -34,7 +34,7 @@ function EditProjectPage() {
       ) : (
         <>
           <p>You owner</p>
-          <DeleteProject projectData={projectData} />
+          <DeleteProject />
         </>
       )}
     </div>

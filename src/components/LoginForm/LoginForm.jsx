@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import "../Components.css";
 
 function LoginForm() {
   const [credentials, setCredentials] = useState({
@@ -35,6 +36,8 @@ function LoginForm() {
       postData().then((response) => {
         console.log("response:", response);
         window.localStorage.setItem("token", response.token);
+        window.localStorage.setItem("username", credentials.username);
+        console.log("username:", credentials.username);
         history.push("/");
       });
     }

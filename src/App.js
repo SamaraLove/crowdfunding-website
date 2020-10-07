@@ -13,10 +13,9 @@ import AllUsers from "./pages/AllUsersPage";
 import EditProjectPage from "./pages/EditProjectPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import DeleteProjectPage from "./pages/DeleteProjectPage";
-import DeleteProfilePage from "./pages/DeleteProfilePage";
+import DeleteUserPage from "./pages/DeleteUserPage";
 import AllPledgesPage from "./pages/AllPledgesPage";
-import DELETE from "./pages/DELETE";
-import DELETEUSER from "./pages/DELETEUSER";
+// import DELETE from "./pages/DELETE";
 
 import "./App.css";
 
@@ -27,7 +26,7 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/profile/:username/delete">
-            <DELETEUSER />
+            <DeleteUserPage />
           </Route>
           <Route path="/projects/:id/delete1">
             <DeleteProjectPage />
@@ -41,7 +40,6 @@ function App() {
           <Route path="/projects/:id/edit">
             <EditProjectPage />
           </Route>
-
           <Route path="/about">
             <AboutPage />
           </Route>
@@ -63,11 +61,9 @@ function App() {
           <Route path="/profile/:username/edit">
             <EditProfilePage />
           </Route>
-
           <Route path="/profile/:username/">
             <ProfilePage />
           </Route>
-
           <Route path="/projects/:id/">
             <ProjectPage />
           </Route>

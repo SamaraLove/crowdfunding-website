@@ -27,13 +27,29 @@ function CreateProjectFrom(props) {
       userprofile: {
         //   created: userData.created,
         //   updated: userData.updated,
-        profile_img: userData.userprofile.profile_img,
-        bio: userData.userprofile.bio,
+        bio: (userData.userprofile.bio = null ? " " : userData.userprofile.bio),
+        profile_img:
+          userData.userprofile.profile_img !== undefined
+            ? userData.userprofile.profile_img
+            : "",
         location: userData.userprofile.location,
       },
     });
   }, [userData]);
-
+  //   {!profile_img ? (
+  //     <>
+  //     ""
+  //     </>
+  //   ) : (
+  //       <>
+  //       userData.userprofile.profile_img
+  //       </>
+  //       )
+  //   }
+  //   profile_img:
+  //   userData.userprofile.profile_img != null
+  //     ? userData.userprofile.profile_img
+  //     : "",
   const handleChange = (e) => {
     const { id, value } = e.target;
     setCredentials((prevCredentials) => ({
@@ -42,10 +58,12 @@ function CreateProjectFrom(props) {
       //   [id]: value,
     }));
   };
-  console.log(credentials.userprofile.bio);
+  //   console.log(credentials.userprofile.bio);
 
   const editData = async () => {
     let token = window.localStorage.getItem("token");
+    // let token = window.localStorage.getItem("token");
+
     let username = localStorage.username;
     console.log(username);
     const response = await fetch(
@@ -68,7 +86,7 @@ function CreateProjectFrom(props) {
     if (credentials.username) {
       editData().then((response) => {
         console.log(response);
-        window.localStorage.setItem("username", credentials.username);
+        // window.localStorage.setItem("username", credentials.username);
         history.push(`/profile/${userData.username}`);
       });
     }

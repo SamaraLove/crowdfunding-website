@@ -95,7 +95,7 @@ function EditProjectFrom(props) {
       editData().then((response) => {
         window.localStorage.setItem("title", credentials.title);
         // console.log("set local storage");
-        history.push("/");
+        history.push(`/projects/${projectData.id}/`);
       });
     }
   };

@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-function DeleteProjectFrom(props) {
+function DeleteUserFrom(props) {
   const history = useHistory();
   //   const { projectData } = props;
 
-  const { id } = useParams();
+  const { username } = useParams();
 
-  console.log(id);
   const editData = async () => {
     let token = window.localStorage.getItem("token");
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}projects/${id}/`,
+      `${process.env.REACT_APP_API_URL}users/${username}/`,
       {
         method: "delete",
         headers: {
@@ -27,8 +26,8 @@ function DeleteProjectFrom(props) {
     e.preventDefault();
     console.log("Submit pressed");
     editData().then((response) => {
-      //   window.localStorage.removeItem("title", credentials.title);
-      // console.log("set local storage");
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
       history.push("/");
       window.location.reload();
     });
@@ -38,10 +37,10 @@ function DeleteProjectFrom(props) {
     <form>
       <p>Are you sure you want to delete? </p>
       <button type="submit" onClick={handleSubmit}>
-        Delete Project
+        Delete User
       </button>
     </form>
   );
 }
 
-export default DeleteProjectFrom;
+export default DeleteUserFrom;

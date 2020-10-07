@@ -26,7 +26,7 @@ function CreateProjectFrom() {
     company: "",
     deadline: "",
     category: "",
-    // is_open: true,
+    is_open: true,
     // date_created: "2020-09-05T11:01:29.014038+08:00",
     // owner: "maintest",
     // last_update_at: "2020-09-05T11:01:29.014077+08:00",

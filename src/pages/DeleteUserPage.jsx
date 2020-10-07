@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DeleteProfileForm from "../components/LoginForm/DeleteProfileForm";
+import DeleteUserForm from "../components/LoginForm/DeleteUserForm";
 
 function DeleteProfilePage() {
   const [userData, setUserData] = useState({ userprofile: {} });
@@ -16,7 +16,7 @@ function DeleteProfilePage() {
       });
   }, []);
 
-  return <DeleteProfileForm userData={userData} />;
+  return <DeleteUserForm userData={userData} />;
 }
 
 export default DeleteProfilePage;

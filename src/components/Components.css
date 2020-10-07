@@ -1,0 +1,24 @@
+#project-list {
+  display: grid;
+  margin: auto;
+  grid-template-columns: 32% 32% 32%;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+form label {
+  /* label tag doesn't have the property 'width' */
+  display: inline-block;
+  width: 50x;
+  padding-right: 5px;
+  color: darkcyan;
+  align-items: center;
+}
+form input {
+  border: 1px solid #dfc5fe;
+  background-color: #fff;
+  /* padding: 5px; */
+  /* font-size: 18px; */
+  border-radius: 5px;
+  /* min-height: 40px; */
+  font-family: monospace;
+}

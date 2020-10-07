@@ -5,6 +5,8 @@ import EditProjectForm from "../components/LoginForm/EditProjectForm";
 function EditProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
+  let username = localStorage.username;
+  username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -27,14 +29,14 @@ function EditProjectPage() {
   return (
     //   <h1>This is the create project form.</h1>
     <div>
-      {!LoggedIn ? (
+      {LoggedIn && username == projectData.username ? (
         <>
-          <p>You not owner</p>
+          <p>Logged in</p>
+          <EditProjectForm projectData={projectData} />
         </>
       ) : (
         <>
-          <p>You owner</p>
-          <EditProjectForm projectData={projectData} />
+          <p>Login to create or edit a project </p>
         </>
       )}
     </div>

@@ -27,6 +27,9 @@ function CreateAccountPage() {
   };
 
   const postData = async () => {
+    // let token = window.localStorage.setItem("token");
+    // let username = window.localStorage.setItem("username");
+
     const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
       method: "post",
       headers: {
@@ -44,13 +47,15 @@ function CreateAccountPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if (credentials.title != null) {
     if (credentials.username && credentials.password) {
       postData().then((response) => {
         console.log(response);
-        window.localStorage.setItem("user", credentials.username);
+        // window.localStorage.setItem("user", credentials.username);
         history.push("/login");
       });
     }
+    // }
   };
 
   return (

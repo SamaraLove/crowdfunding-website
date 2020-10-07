@@ -3,10 +3,13 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import ProgressBar from "../components/ProgressBar";
 import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
 // import CreatePledgeForm from "./CreatePledgePage";
+import DELETE from "./DELETE";
 
 function ProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
+  let username = localStorage.username;
+  // let token = localStorage.token;
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -70,22 +73,76 @@ function ProjectPage() {
     // }
   }
 
+  //not rendering fast enough
+  function IsOwnerCanEdit() {
+    username = window.localStorage.getItem("username");
+
+    // if (username != null && projectData.owner != null) {
+    if (username === projectData.owner) {
+      return (
+        <div>
+          <p>username = owner</p>
+          <Link to={`/projects/${id}/edit`}>
+            <p>Edit</p>
+          </Link>
+          <Link to={`/projects/${id}/delete1`}>
+            <p>Delete</p>
+          </Link>
+          {/* <DELETE projectID={id} /> */}
+        </div>
+      );
+    } else {
+      return <p>username != owner</p>;
+    }
+    // }
+  }
+  // console.log("storage", username);
+  // console.log("projectdata", projectData.owner);
+
+  // function formatDate(date) {
+  //   var a = date.split(/[T]/);
+  //   var d = a[0].split("-"); // date
+  //   var t = a[1].split(":"); // time
+  //   t[2] = t[2].split("-"); // Remove Time zone offset
+  //   var formattedDate = new Date(d[0], d[1] - 1, d[2], t[0], t[1], t[2][0]);
+  //   //formattedDate.replace(/ *\([^()]*\) */g, "");
+  //   // var str = formattedDate.toString();
+
+  //   // // this should be safe since nothing else in the date string contains a opening paren
+  //   // var index = str.indexOf(" (");
+
+  //   // // if the index exists
+  //   // if (~index) {
+  //   //   str = str.substr(0, index);
+  //   // }
+  //   return formattedDate;
+  // }
+  // function DateFormat(date) {
+  //   var str = date.toString();
+
+  //   // this should be safe since nothing else in the date string contains a opening paren
+  //   var index = str.indexOf(" (");
+
+  //   // if the index exists
+  //   if (~index) {
+  //     str = str.substr(0, index);
+  //   }
+  // }
+  // console.log(formatDate(projectData.date_created));
+
+  // console.log(formatDate(Date(projectData.date_created)));
+
   return (
     <div>
       <div>
         {!LoggedIn ? (
           <>
-            <p>You not owner</p>
+            <p>Not logged in</p>
           </>
         ) : (
           <>
-            <p>You owner</p>
-            <Link to={`/projects/${id}/edit`}>
-              <p>Edit</p>
-            </Link>
-            <Link to={`/projects/${id}/delete1`}>
-              <p>Delete</p>
-            </Link>
+            <p>logged in</p>
+            <IsOwnerCanEdit />
           </>
         )}
       </div>
@@ -93,7 +150,8 @@ function ProjectPage() {
       <div>
         <h2>{projectData.title}</h2>
         <ProgressBar value={projectData.pledge_total} max={projectData.goal} />
-        <h3>Created at: {projectData.date_created}</h3>
+        {/* <h3>Created at: {projectData.date_created}</h3> */}
+        <h3>Created at: {Date(projectData.date_created)}</h3>
         <img src={projectData.image} alt={projectData.title} />
         {/* <h3>{`Status: ${projectData.is_open}`}</h3> */}
         <h3>
@@ -112,22 +170,34 @@ function ProjectPage() {
         <p>Category: {projectData.category}</p>
         {/* If you're the project lead, see more stats below? */}
         {/* <p>biggest_contribution: {oneProject.biggest_contribution}</p>
-      <p>no_of_pledges: {oneProject.no_of_pledges}</p>
-      <p>last_update_at: {oneProject.last_update_at}</p> */}
+  <p>no_of_pledges: {oneProject.no_of_pledges}</p>
+  <p>last_update_at: {oneProject.last_update_at}</p> */}
         <h3>Recent Pledges: </h3>
         <ul>
           {projectData.pledges.map((pledgeData, key) => {
+            // if (pledgeData.id !== null) {
             return (
               <li key={pledgeData.id}>
                 ${pledgeData.amount} from {pledgeData.supporter} "
                 {pledgeData.comment}"
               </li>
             );
+            // }
           })}
         </ul>
       </div>
       <p>Gift a Pledge</p>
-      <CreatePledgeForm id={id} />
+      <div>
+        {!LoggedIn ? (
+          <>
+            <p>You have to be logged in to gift a pledge</p>
+          </>
+        ) : (
+          <>
+            <CreatePledgeForm id={id} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
