@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import "../Components.css";
 
 function CreatePledgeForm(props) {
   const { id } = props;
@@ -48,12 +49,15 @@ function CreatePledgeForm(props) {
         // console.lo;
         window.localStorage.setItem("pledge", response);
         history.push(`/projects/${id}`);
+        window.location.reload();
       });
     }
   };
   return (
     //   <h1>This is the create pledge form.</h1>
     <form>
+      <h3>Gift a Pledge</h3>
+
       <div>
         <label htmlFor="amount">Amount:</label>
         <input

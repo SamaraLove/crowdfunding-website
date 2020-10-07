@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router-dom";
+import "../Components.css";
 
 function DeleteProjectFrom(props) {
   const history = useHistory();
@@ -7,7 +8,6 @@ function DeleteProjectFrom(props) {
 
   const { id } = useParams();
 
-  console.log(id);
   const editData = async () => {
     let token = window.localStorage.getItem("token");
     const response = await fetch(
@@ -30,17 +30,17 @@ function DeleteProjectFrom(props) {
       //   window.localStorage.removeItem("title", credentials.title);
       // console.log("set local storage");
       history.push("/");
-      window.location.reload();
+      //   window.location.reload();
     });
   };
   return (
     //   <h1>This is the create project form.</h1>
-    <form>
+    <div>
       <p>Are you sure you want to delete? </p>
       <button type="submit" onClick={handleSubmit}>
         Delete Project
       </button>
-    </form>
+    </div>
   );
 }
 

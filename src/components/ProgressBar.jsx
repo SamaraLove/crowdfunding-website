@@ -6,16 +6,21 @@ const ProgressBar = (props) => {
 
   function GoalMet() {
     if (value >= max) {
-      return <p>goal met</p>;
+      return <p>Goal met!</p>;
     } else {
-      return <p>goal not</p>;
+      return <p>Goal not yet met</p>;
     }
   }
+
   return (
     <div className="progress-container">
       <GoalMet />
-      <progress className="progress-filler" value={value} max={max} />
-      <span>{Math.round((value / max) * 100)} %</span>
+      <progress
+        className="progress-filler"
+        value={value != null ? value : 0}
+        max={max}
+      />
+      <span>{value != null ? Math.round((value / max) * 100) : 0} %</span>
     </div>
   );
 };

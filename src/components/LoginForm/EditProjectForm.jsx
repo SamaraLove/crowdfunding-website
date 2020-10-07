@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import "../Components.css";
 
 function EditProjectFrom(props) {
   const [categoryData, setcategoryData] = useState([]);
@@ -27,7 +28,7 @@ function EditProjectFrom(props) {
     company: "",
     deadline: "",
     category: "",
-    is_open: "",
+    // is_open: "",
     // date_created: "2020-09-05T11:01:29.014038+08:00",
     // owner: "maintest",
     // last_update_at: "2020-09-05T11:01:29.014077+08:00",
@@ -44,7 +45,7 @@ function EditProjectFrom(props) {
       category: projectData.category,
       date_created: projectData.date_created,
       last_update_at: projectData.last_update_at,
-      is_open: projectData.is_open,
+      // is_open: projectData.is_open,
     });
   }, [projectData]);
 
@@ -161,7 +162,7 @@ function EditProjectFrom(props) {
           onChange={handleChange}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="is_open">Open:</label>
         <input
           type="checkbox"
@@ -169,7 +170,7 @@ function EditProjectFrom(props) {
           value={credentials.is_open}
           onChange={handleChange}
         />
-      </div>
+      </div> */}
       {/* <div>
         <label htmlFor="date_created">Date created:</label>
         <input

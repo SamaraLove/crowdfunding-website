@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
+import Error404 from "./components/Error404";
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -69,6 +70,9 @@ function App() {
           </Route>
           <Route path="/" exact>
             <HomePage />
+          </Route>
+          <Route>
+            <Route path="*" exact={true} component={Error404} />
           </Route>
         </Switch>
       </div>

@@ -8,8 +8,6 @@ function ProjectCard(props) {
   const { projectData } = props;
 
   //template
-  // console.log(projectData.pledge_total);
-  // console.log(projectData.goal);
 
   function OpenProject() {
     if (projectData.is_open) {

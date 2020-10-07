@@ -27,9 +27,8 @@ function EditProjectPage() {
   }, []);
 
   return (
-    //   <h1>This is the create project form.</h1>
     <div>
-      {LoggedIn && username == projectData.username ? (
+      {LoggedIn && username == projectData.owner ? (
         <>
           <p>Logged in</p>
           <EditProjectForm projectData={projectData} />
@@ -37,6 +36,7 @@ function EditProjectPage() {
       ) : (
         <>
           <p>Login to create or edit a project </p>
+          {/* <EditProjectForm projectData={projectData} /> */}
         </>
       )}
     </div>

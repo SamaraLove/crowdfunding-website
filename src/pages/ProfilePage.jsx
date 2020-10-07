@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 // import { isAuthenticated } from "../helpers/localStorage";
-import ProjectCard from "../components/ProjectCard/ProjectCard";
 
 function ProfilePage() {
   const [userData, setUserData] = useState({ userprofile: {} });
@@ -9,41 +8,44 @@ function ProfilePage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
   let user = localStorage.username;
+  const [IsSuccess, setIsSuccess] = useState(false);
+  const [Error, setError] = useState();
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     token != null ? setLoggedIn(true) : setLoggedIn(false);
   }, [location]);
 
+  const fetchUser = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}users/${username}/`
+    );
+
+    if (!response.ok) {
+      const data = await response.json();
+      console.error({ response, data });
+      return;
+    }
+
+    const data = await response.json();
+
+    if (data.error) {
+      console.error({ data });
+      return;
+    }
+
+    setUserData(data);
+  };
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}users/${username}/`)
-      .then((results) => {
-        return results.json();
-      })
-      .then((data) => {
-        setUserData(data);
-      });
+    fetchUser();
   }, []);
 
-  // const [projectList, setProjectList] = useState([]);
-
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_API_URL}projects/`)
-  //     .then((results) => {
-  //       return results.json();
-  //     })
-  //     .then((data) => {
-  //       setProjectList(data);
-  //       // data.map((projectList) => console.log(projectList.owner));
-  //     });
-  // }, []);
-
   function ProfileExist() {
-    if (userData.userprofile) {
+    if (userData.userprofile != null) {
       return (
         <div>
           <img src={userData.userprofile.profile_img} alt="Avatar" />
-          {/* <p>rating: {userData.userprofile.rating}</p> */}
           <p>created: {userData.userprofile.created}</p>
           <p>updated: {userData.userprofile.updated}</p>
           <p>bio: {userData.userprofile.bio}</p>
@@ -54,10 +56,9 @@ function ProfilePage() {
       return <p>empty</p>;
     }
   }
-  //not rendering fast enough
+
   function IsOwnerCanEdit() {
     user = window.localStorage.getItem("username");
-
     // if (username != null && projectData.owner != null) {
     if (user === username) {
       return (
@@ -76,9 +77,18 @@ function ProfilePage() {
     }
     // }
   }
-  // console.log("storage", user);
-  // console.log("params", username);
-  // console.log("userdata", userData.username);
+
+  function UserDetail() {
+    return (
+      <div>
+        <h2>{userData.username}</h2>
+        {/* <h2>ID: {userData.id}</h2> */}
+        <h3>Email: {userData.email}</h3>
+        {/* <p>password: {userData.password}</p> */}
+        <ProfileExist />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -94,33 +104,7 @@ function ProfilePage() {
           </>
         )}
       </div>
-      <div>
-        {/* <Link to={`/profile/${username}/edit`}>
-          <p>Edit</p>
-        </Link>
-        <Link to={`/profile/${username}/delete`}>
-          <p>Delete</p>
-        </Link>
-        <DELETEUSER /> */}
-
-        <h2>{userData.username}</h2>
-        {/* <h2>ID: {userData.id}</h2> */}
-        <h3>Email: {userData.email}</h3>
-        {/* <p>password: {userData.password}</p> */}
-        <ProfileExist />
-      </div>
-      <div>
-        <h2> Activity </h2>
-        <p> Projects {userData.username} has created </p>
-        {/* <div id="project-list">
-        {projectList.map((projectData, key) => {
-          return (
-            <ProjectCard key={userData.username} projectData={projectData} />
-          );
-          // <div key={key}>{projectData.title}</div>;
-        })}
-      </div> */}
-      </div>
+      <UserDetail />
     </div>
   );
 }

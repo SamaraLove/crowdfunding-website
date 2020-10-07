@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "../Components.css";
 
 function CreateAccountPage() {
   const history = useHistory();

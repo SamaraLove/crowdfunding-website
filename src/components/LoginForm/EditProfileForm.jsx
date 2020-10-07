@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import "../Components.css";
 
 function CreateProjectFrom(props) {
   const history = useHistory();
@@ -19,7 +20,7 @@ function CreateProjectFrom(props) {
       location: "",
     },
   });
-
+  console.log(userData.userprofile);
   useEffect(() => {
     setCredentials({
       username: userData.username,
@@ -27,29 +28,17 @@ function CreateProjectFrom(props) {
       userprofile: {
         //   created: userData.created,
         //   updated: userData.updated,
-        bio: (userData.userprofile.bio = null ? " " : userData.userprofile.bio),
+        bio: userData.userprofile === null ? " " : userData.userprofile.bio,
         profile_img:
-          userData.userprofile.profile_img !== undefined
-            ? userData.userprofile.profile_img
-            : "",
-        location: userData.userprofile.location,
+          userData.userprofile === null
+            ? " "
+            : userData.userprofile.profile_img,
+        location:
+          userData.userprofile === null ? " " : userData.userprofile.location,
       },
     });
   }, [userData]);
-  //   {!profile_img ? (
-  //     <>
-  //     ""
-  //     </>
-  //   ) : (
-  //       <>
-  //       userData.userprofile.profile_img
-  //       </>
-  //       )
-  //   }
-  //   profile_img:
-  //   userData.userprofile.profile_img != null
-  //     ? userData.userprofile.profile_img
-  //     : "",
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setCredentials((prevCredentials) => ({

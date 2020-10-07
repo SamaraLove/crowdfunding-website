@@ -5,3 +5,24 @@
   column-gap: 10px;
   row-gap: 10px;
 }
+
+img {
+  width: 50%;
+  float: right;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* img {
+  float: right;
+  margin: 0 0 10px 10px;
+  width: 50%;
+} */
+#owner-links {
+  float: right;
+  /* text-align: right; */
+  display: flex;
+  flex-direction: row;
+  /* justify-content: right; */
+  flex-wrap: wrap;
+}

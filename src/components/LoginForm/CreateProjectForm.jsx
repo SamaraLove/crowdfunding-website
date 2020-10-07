@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import "../Components.css";
 
 function CreateProjectFrom() {
   const [categoryData, setcategoryData] = useState([]);
@@ -86,65 +87,66 @@ function CreateProjectFrom() {
   return (
     //   <h1>This is the create project form.</h1>
     <form>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          placeholder="Enter title"
-          onChange={handleChange}
-        />
-        {/* {errors.title && errors.title.type === "required" && (
+      <div id="form-div">
+        <div>
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Enter title"
+            onChange={handleChange}
+          />
+          {/* {errors.title && errors.title.type === "required" && (
         <span>This is required</span>
       )} */}
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <input
-          type="text"
-          id="description"
-          placeholder="description"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="goal">Goal:</label>
-        <input
-          type="number"
-          min="0"
-          id="goal"
-          placeholder="goal in $AUD"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="image">Image:</label>
-        <input
-          type="url"
-          id="image"
-          placeholder="image url"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="company">Company:</label>
-        <input
-          type="text"
-          id="company"
-          placeholder="company name"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="deadline">Deadline:</label>
-        <input
-          type="date"
-          id="deadline"
-          placeholder="deadline"
-          onChange={handleChange}
-        />
-      </div>
-      {/* <div>
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <input
+            type="text"
+            id="description"
+            placeholder="description"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="goal">Goal:</label>
+          <input
+            type="number"
+            min="0"
+            id="goal"
+            placeholder="goal in $AUD"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image:</label>
+          <input
+            type="url"
+            id="image"
+            placeholder="image url"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="company">Company:</label>
+          <input
+            type="text"
+            id="company"
+            placeholder="company name"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="deadline">Deadline:</label>
+          <input
+            type="date"
+            id="deadline"
+            placeholder="deadline"
+            onChange={handleChange}
+          />
+        </div>
+        {/* <div>
         <label htmlFor="is_open">Open:</label>
         <input
           type="checkbox"
@@ -153,8 +155,8 @@ function CreateProjectFrom() {
           onChange={handleChange}
         />
       </div> */}
-      {/* this doesn't set it as a boolean for true and false  */}
-      {/* <div>
+        {/* this doesn't set it as a boolean for true and false  */}
+        {/* <div>
       <label htmlFor="is_open">Open:</label>
       <select type="select" id="is_open" onChange={handleChange}>
         <option value="true">Yes</option>
@@ -162,7 +164,7 @@ function CreateProjectFrom() {
       </select>
     </div> */}
 
-      {/* <div>
+        {/* <div>
         <label htmlFor="date_created">Date created:</label>
         <input
           type="datetime-local"
@@ -181,25 +183,26 @@ function CreateProjectFrom() {
         />
       </div> */}
 
-      <div>
-        <label htmlFor="category">Category:</label>
-        <select
-          type="select"
-          id="category"
-          placeholder="category"
-          onChange={handleChange}
-        >
-          {categoryData.map((cat) => (
-            <option key={cat.category} value={cat.category}>
-              {cat.category}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div>
+          <label htmlFor="category">Category:</label>
+          <select
+            type="select"
+            id="category"
+            placeholder="category"
+            onChange={handleChange}
+          >
+            {categoryData.map((cat) => (
+              <option key={cat.category} value={cat.category}>
+                {cat.category}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <button type="submit" onClick={handleSubmit}>
-        Create Project
-      </button>
+        <button type="submit" onClick={handleSubmit}>
+          Create Project
+        </button>
+      </div>
     </form>
   );
 }

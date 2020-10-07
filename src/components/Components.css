@@ -5,20 +5,176 @@
   column-gap: 10px;
   row-gap: 10px;
 }
+
+#category_buttons {
+  height: auto;
+  border-radius: 5px;
+  margin: 1% auto;
+  padding: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  border-color: aqua;
+  /* flex-direction: column; */
+  text-align: center;
+  justify-content: center;
+  /* max-width: 70vw; */
+}
+
+form {
+  height: auto;
+  border-radius: 5px;
+  margin: 2% auto;
+  box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+  padding: 2%;
+  background-image: linear-gradient(-225deg, #e3fdf5 50%, grey 50%);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: center;
+  max-width: 70vw;
+}
 form label {
   /* label tag doesn't have the property 'width' */
   display: inline-block;
-  width: 50x;
+  width: 25vw;
   padding-right: 5px;
   color: darkcyan;
   align-items: center;
+  text-align: left;
+  padding-bottom: 2%;
 }
-form input {
+form input,
+select {
   border: 1px solid #dfc5fe;
   background-color: #fff;
-  /* padding: 5px; */
-  /* font-size: 18px; */
   border-radius: 5px;
-  /* min-height: 40px; */
   font-family: monospace;
+  width: 25vw;
+}
+
+/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
+/* @import url("https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur"); */
+/* End Fonts */
+/* Start Global rules */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/* End Global rules */
+
+/* Start body rules */
+body {
+  /* background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
+  /* background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%); */
+  /* background-image: linear-gradient(to top, white 0%, grey 100%); */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* the header form form */
+header {
+  margin: 2% auto 10% auto;
+  text-align: center;
+}
+/* Login title form form */
+header h2 {
+  font-size: 250%;
+  font-family: "Playfair Display", serif;
+  color: #3e403f;
+}
+/*  A welcome message or an explanation of the login form */
+header p {
+  letter-spacing: 0.05em;
+}
+
+/* //////////////////////////////////////////// */
+/* //////////////////////////////////////////// */
+
+/* Show/hide password Font Icon */
+#eye {
+  background: #fff;
+  color: #333;
+
+  margin: 5.9px 0 0 0;
+  margin-left: -20px;
+  padding: 15px 9px 19px 0px;
+  border-radius: 0px 5px 5px 0px;
+
+  float: right;
+  position: relative;
+  right: 1%;
+  top: -0.2%;
+  z-index: 5;
+
+  cursor: pointer;
+}
+
+/* //////////////////////////////////////////// */
+/* //////////////////////////////////////////// */
+
+/* buttons  */
+button {
+  display: inline-block;
+  color: #252537;
+
+  /* width: 280px; */
+  /* height: 50px; */
+
+  padding: 0 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s linear;
+
+  /* margin: 7% auto; */
+  letter-spacing: 0.05em;
+}
+/* Submits */
+.submits {
+  width: 48%;
+  display: inline-block;
+  float: left;
+  margin-left: 2%;
+}
+
+/*       Forgot Password button FAF3DD  */
+.frgt-pass {
+  background: transparent;
+}
+
+/*     Sign Up button  */
+.sign-up {
+  background: #b8f2e6;
+}
+
+/* buttons hover */
+button:hover {
+  transform: translatey(3px);
+  box-shadow: none;
+}
+
+/* buttons hover Animation */
+button:hover {
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+#Error404 {
+  text-align: center;
 }
