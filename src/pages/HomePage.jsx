@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ProjectCard from "../components/ProjectCard/ProjectCard";
+import "../App.css";
 
 function HomePage() {
   // Variables
   const [projectList, setProjectList] = useState([]);
   const [filter, setFilter] = useState();
   //methods
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}projects`)
       .then((results) => {
@@ -15,7 +17,7 @@ function HomePage() {
         setProjectList(data);
       });
   }, []);
-  //templates
+
   const changeFilter = (event) => {
     if (event.target.name === "All") {
       setFilter();
@@ -23,8 +25,9 @@ function HomePage() {
       setFilter(event.target.name);
     }
   };
+
   return (
-    <div>
+    <div id="Home">
       <div id="category_buttons">
         <button type="button" id="Race" name="Race" onClick={changeFilter}>
           Race
@@ -34,8 +37,8 @@ function HomePage() {
         </button>
         <button
           type="button"
-          id="Accessories"
-          name="Accessories"
+          id="Acessories"
+          name="Acessories"
           onClick={changeFilter}
         >
           Accessories

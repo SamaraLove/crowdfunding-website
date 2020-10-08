@@ -28,9 +28,8 @@ function EditProfilePage() {
   return (
     <div>
       {LoggedIn && username_ST == username ? (
-        // {LoggedIn ? (
         <>
-          <p>Logged in</p>
+          <p>Logged in as {username} </p>
           <EditProfileForm userData={userData} />;
         </>
       ) : (

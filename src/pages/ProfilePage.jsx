@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-// import { isAuthenticated } from "../helpers/localStorage";
+import ProjectCard from "../components/ProjectCard/ProjectCard";
+import "../App.css";
 
 function ProfilePage() {
   const [userData, setUserData] = useState({ userprofile: {} });
@@ -10,6 +11,8 @@ function ProfilePage() {
   let user = localStorage.username;
   const [IsSuccess, setIsSuccess] = useState(false);
   const [Error, setError] = useState();
+  const [projectList, setProjectList] = useState([]);
+  const [filter, setFilter] = useState();
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -45,9 +48,13 @@ function ProfilePage() {
     if (userData.userprofile != null) {
       return (
         <div>
-          <img src={userData.userprofile.profile_img} alt="Avatar" />
-          <p>created: {userData.userprofile.created}</p>
-          <p>updated: {userData.userprofile.updated}</p>
+          <img
+            id="profileimg"
+            src={userData.userprofile.profile_img}
+            alt="Avatar"
+          />
+          <p>created:{Date(userData.userprofile.created)}</p>
+          <p>updated: {Date(userData.userprofile.updated)}</p>
           <p>bio: {userData.userprofile.bio}</p>
           <p>location: {userData.userprofile.location}</p>
         </div>
@@ -62,8 +69,8 @@ function ProfilePage() {
     // if (username != null && projectData.owner != null) {
     if (user === username) {
       return (
-        <div>
-          <p>username = owner</p>
+        <div id="owner-links">
+          {/* <p>username = owner</p> */}
           <Link to={`/profile/${username}/edit`}>
             <p>Edit</p>
           </Link>
@@ -73,7 +80,8 @@ function ProfilePage() {
         </div>
       );
     } else {
-      return <p>username != owner</p>;
+      return <p></p>;
+      // return <p>username != owner</p>;
     }
     // }
   }
@@ -90,21 +98,67 @@ function ProfilePage() {
     );
   }
 
+  //methods
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}projects`)
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        setProjectList(data);
+      });
+  }, []);
+  //templates
+  const changeFilter = (event) => {
+    if (event.target.name === "All") {
+      setFilter();
+    } else {
+      setFilter(event.target.name);
+    }
+  };
+
+  function UserActivity() {
+    return (
+      <div id="Activity">
+        <br></br>
+        <h3>Activity</h3>
+        <div id="category_buttons">
+          <button
+            type="button"
+            id={username}
+            name={username}
+            onClick={changeFilter}
+          >
+            <p>Click here to see the projects by</p>
+            {username}
+          </button>
+        </div>
+
+        <div id="project-list">
+          {projectList.reduce((total, projectData, key) => {
+            if (filter != null && projectData.owner !== filter) return total;
+            total.push(<ProjectCard key={key} projectData={projectData} />);
+            return total;
+          }, [])}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div>
         {!LoggedIn ? (
-          <>
-            <p>Not logged in</p>
-          </>
+          <>{/* <p>You are not logged in. Create an account now!</p> */}</>
         ) : (
           <>
-            <p>logged in</p>
+            {/* <p>Logged in as {username} </p> */}
             <IsOwnerCanEdit />
           </>
         )}
       </div>
       <UserDetail />
+      <UserActivity />
     </div>
   );
 }

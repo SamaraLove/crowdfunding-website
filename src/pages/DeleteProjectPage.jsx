@@ -5,6 +5,8 @@ import DeleteProject from "../components/LoginForm/DeleteProject";
 function EditProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
+  let username = localStorage.username;
+  username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -29,11 +31,12 @@ function EditProjectPage() {
     <div>
       {!LoggedIn ? (
         <>
-          <p>You not owner</p>
+          <p>Login to edit a project </p>
         </>
       ) : (
         <>
-          <p>You owner</p>
+          <p>Logged in as {username} </p>
+          <br></br>
           <DeleteProject />
         </>
       )}

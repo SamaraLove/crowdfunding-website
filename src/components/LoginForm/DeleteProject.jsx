@@ -36,7 +36,7 @@ function DeleteProjectFrom(props) {
   return (
     //   <h1>This is the create project form.</h1>
     <div>
-      <p>Are you sure you want to delete? </p>
+      <p>Are you sure you want to delete Project {id}? </p>
       <button type="submit" onClick={handleSubmit}>
         Delete Project
       </button>

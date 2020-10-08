@@ -30,7 +30,7 @@ function EditProjectPage() {
     <div>
       {LoggedIn && username == projectData.owner ? (
         <>
-          <p>Logged in</p>
+          <p>{username} Logged in</p>
           <EditProjectForm projectData={projectData} />
         </>
       ) : (

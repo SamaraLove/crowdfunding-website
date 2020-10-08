@@ -101,10 +101,10 @@ function ProjectPage() {
           <div>
             <div>
               {!LoggedIn ? (
-                <>{/* <p>Not logged in</p> */}</>
+                <>{/* <p>You are not logged in</p> */}</>
               ) : (
                 <>
-                  {/* <p>logged in</p> */}
+                  {/* <p>Logged in as {username} </p> */}
                   <IsOwnerCanEdit />
                 </>
               )}
@@ -112,19 +112,26 @@ function ProjectPage() {
 
             <div>
               <h2>{projectData.title}</h2>
-              <img src={projectData.image} alt={projectData.title} />
+              <img
+                id="projectpageimg"
+                src={projectData.image}
+                alt={projectData.title}
+              />
               <ProgressBar
                 value={projectData.pledge_total}
                 max={projectData.goal}
               />
               {/* <h3>Created at: {projectData.date_created}</h3> */}
-              <h3>Created at: {Date(projectData.date_created)}</h3>
+              <p>Created at: {Date(projectData.date_created)}</p>
               {/* <h3>{`Status: ${projectData.is_open}`}</h3> */}
-              <h3>
-                Status:
-                {firstDateIsPastDayComparedToSecond()}
-                <Status2 />
-              </h3>
+              <div id="status">
+                <h3>Status: </h3>
+                <h3>
+                  {firstDateIsPastDayComparedToSecond()}
+                  <Status2 />
+                </h3>
+              </div>
+
               <p>Description: {projectData.description}</p>
               <Link to={`/profile/${projectData.owner}/`}>
                 <p>Owner: {projectData.owner}</p>

@@ -5,6 +5,8 @@ import CreateProjectForm from "../components/LoginForm/CreateProjectForm";
 function CreateProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
+  let username = localStorage.username;
+  username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -22,6 +24,7 @@ function CreateProjectPage() {
         </>
       ) : (
         <>
+          <p>Logged in as {username} </p>
           <CreateProjectForm />
         </>
       )}

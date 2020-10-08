@@ -5,6 +5,8 @@ import CreateAccountForm from "../components/LoginForm/CreateAccountForm";
 function CreateAccountPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
+  let username = localStorage.username;
+  username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -17,7 +19,7 @@ function CreateAccountPage() {
         <CreateAccountForm />
       ) : (
         <>
-          <p>You are already logged in. </p>
+          <p>Logged in as {username} </p>
         </>
       )}
     </div>

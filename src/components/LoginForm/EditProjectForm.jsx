@@ -49,7 +49,7 @@ function EditProjectFrom(props) {
     });
   }, [projectData]);
 
-  console.log("proejctdata", projectData.is_open);
+  // console.log("proejctdata", projectData.is_open);
   //   console.log("proejctdata", projectData.pledge_total);
 
   const handleChange = (e) => {
