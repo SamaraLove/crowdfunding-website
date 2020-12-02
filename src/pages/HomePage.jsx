@@ -9,7 +9,7 @@ function HomePage() {
   //methods
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}projects`)
+    fetch(`${process.env.REACT_APP_API_URL}projects/`)
       .then((results) => {
         return results.json();
       })
