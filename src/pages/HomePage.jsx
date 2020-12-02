@@ -64,7 +64,7 @@ function HomePage() {
         </button>
       </div>
       <p>Don't know who to donate to? See our trending projects below.</p>
-
+      <br></br>
       <div id="project-list">
         {projectList.reduce((total, projectData, key) => {
           if (filter != null && projectData.category !== filter) return total;

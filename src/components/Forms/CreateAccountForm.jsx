@@ -12,12 +12,6 @@ function CreateAccountPage() {
     // password: "",
     userprofile: {},
   });
-  //   rating: "",
-  //   created: "",
-  //   updated: "",
-  //   profileImg: "",
-  //   bio: "",
-  //   location: "",
 
   const handleChange = (e) => {
     const { id, value } = e.target;

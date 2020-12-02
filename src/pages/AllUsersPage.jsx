@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import UserCard from "../components/ProjectCard/UserCard";
 
 function AllUsersPage() {
-  //   return <h1>This is the AllUsers Page .</h1>;
   //variables
   const [userList, setUserList] = useState([]);
 

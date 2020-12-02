@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import CreateAccountForm from "../components/LoginForm/CreateAccountForm";
+import CreateAccountForm from "../components/Forms/CreateAccountForm";
 
 function CreateAccountPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
-  let username = localStorage.username;
-  username = window.localStorage.getItem("username");
+  let username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");

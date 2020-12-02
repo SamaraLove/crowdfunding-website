@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import ProgressBar from "../components/ProgressBar";
-import CreatePledgeForm from "../components/LoginForm/CreatePledgeForm";
-// import CreatePledgeForm from "./CreatePledgePage";
-import DeleteProject from "../components/LoginForm/DeleteProject";
+import CreatePledgeForm from "../components/Forms/CreatePledgeForm";
+import DeleteProject from "../components/Forms/DeleteProject";
 import Error404 from "../components/Error404";
 import "../App.css";
 
@@ -11,18 +10,15 @@ function ProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
   let username = localStorage.username;
-  // let token = localStorage.token;
   const [IsSuccess, setIsSuccess] = useState(false);
   const [Error, setError] = useState();
+  const { id } = useParams();
+  const [projectData, setProjectData] = useState({ pledges: [] });
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     token != null ? setLoggedIn(true) : setLoggedIn(false);
   }, [location]);
-
-  const { id } = useParams();
-
-  const [projectData, setProjectData] = useState({ pledges: [] });
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)

@@ -6,7 +6,7 @@ function Nav() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
   const location = useLocation();
-  let username = localStorage.username;
+  let username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");

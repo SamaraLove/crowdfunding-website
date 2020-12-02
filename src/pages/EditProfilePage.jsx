@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import EditProfileForm from "../components/LoginForm/EditProfileForm";
+import EditProfileForm from "../components/Forms/EditProfileForm";
 
 function EditProfilePage() {
   const [userData, setUserData] = useState({ userprofile: {} });
   const { username } = useParams();
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
-  let username_ST = localStorage.username;
-  username_ST = window.localStorage.getItem("username");
+  let username_ST = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");

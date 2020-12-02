@@ -20,7 +20,7 @@ function CreateProjectFrom(props) {
       location: "",
     },
   });
-  console.log(userData.userprofile);
+  // console.log(userData.userprofile);
   useEffect(() => {
     setCredentials({
       username: userData.username,
@@ -47,11 +47,9 @@ function CreateProjectFrom(props) {
       //   [id]: value,
     }));
   };
-  //   console.log(credentials.userprofile.bio);
 
   const editData = async () => {
     let token = window.localStorage.getItem("token");
-    // let token = window.localStorage.getItem("token");
 
     let username = localStorage.username;
     console.log(username);
@@ -74,7 +72,7 @@ function CreateProjectFrom(props) {
     console.log("Submit pressed");
     if (credentials.username) {
       editData().then((response) => {
-        console.log(response);
+        // console.log(response);
         // window.localStorage.setItem("username", credentials.username);
         history.push(`/profile/${userData.username}`);
       });

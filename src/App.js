@@ -7,7 +7,6 @@ import ProjectPage from "./pages/ProjectPage";
 import ProfilePage from "./pages/ProfilePage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/Login";
-// import CreatePledgePage from "./pages/CreatePledgePage";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import CreateAccount from "./pages/CreateAccount";
 import AllUsers from "./pages/AllUsersPage";

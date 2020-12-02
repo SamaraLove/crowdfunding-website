@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import CreateProjectForm from "../components/LoginForm/CreateProjectForm";
+import CreateProjectForm from "../components/Forms/CreateProjectForm";
 
 function CreateProjectPage() {
   const [LoggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
-  let username = localStorage.username;
-  username = window.localStorage.getItem("username");
+  let username = window.localStorage.getItem("username");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -14,7 +13,6 @@ function CreateProjectPage() {
   }, [location]);
 
   return (
-    //   <h1>This is the create project form.</h1>
     <div>
       {!LoggedIn ? (
         <>
